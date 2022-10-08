@@ -29,6 +29,7 @@ app.get('/assignV2',(req,res)=>{
     if(Queue.v2.body.status == false){
         console.log('creating new hash')
         let hash = crypto.createHash('md5').update(Math.floor(Date.now() / 1000).toString()).digest("hex")
+        hash = hash.slice(0,5)
         console.log(Math.floor(Date.now() / 1000))
         let {activePlayers,status,token} = Queue.v2.body
         activePlayers++
@@ -77,6 +78,7 @@ app.get('/assignV3',(req,res)=>{
     if(Queue.v3.body.status == false){
         console.log('creating new hash')
         let hash = crypto.createHash('md5').update(Math.floor(Date.now() / 1000).toString()).digest("hex")
+        hash = hash.slice(0,5)
         console.log(Math.floor(Date.now() / 1000))
         let {activePlayers,status,token} = Queue.v2.body
         activePlayers++
@@ -123,6 +125,7 @@ app.get('/assignV4',(req,res)=>{
     if(Queue.v4.body.status == false){
         console.log('creating new hash')
         let hash = crypto.createHash('md5').update(Math.floor(Date.now() / 1000).toString()).digest("hex")
+        hash = hash.slice(0,5)
         console.log(Math.floor(Date.now() / 1000))
         let {activePlayers,status,token} = Queue.v4.body
         activePlayers++
@@ -168,6 +171,7 @@ app.get('/assignV5',(req,res)=>{
     if(Queue.v5.body.status == false){
         console.log('creating new hash')
         let hash = crypto.createHash('md5').update(Math.floor(Date.now() / 1000).toString()).digest("hex")
+        hash = hash.slice(0,5)
         console.log(Math.floor(Date.now() / 1000))
         let {activePlayers,status,token} = Queue.v5.body
         activePlayers++
@@ -213,6 +217,7 @@ app.get('/assignV6',(req,res)=>{
     if(Queue.v6.body.status == false){
         console.log('creating new hash')
         let hash = crypto.createHash('md5').update(Math.floor(Date.now() / 1000).toString()).digest("hex")
+        hash = hash.slice(0,5)
         console.log(Math.floor(Date.now() / 1000))
         let {activePlayers,status,token} = Queue.v6.body
         activePlayers++
