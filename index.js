@@ -9,7 +9,7 @@ app.use(bodyParser())
 let body = {
     status: false,
     activePlayers: 0,
-    token: ''
+    token: '',
 }
 let Queue = {
     v2: {body,capcity:2,timestamp:0},
@@ -41,8 +41,9 @@ app.get('/assignV2',(req,res)=>{
         match[token] = {output: "not ready"}
         Queue.v2.timestamp = Math.floor(Math.floor(Date.now() / 1000))
         timeoutv2= setTimeout(()=>{
-            let {activePlayers,status,token} = Queue.v2.body
-            match[token] = null
+            let {activePlayers,status,token,expired} = Queue.v2.body
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -64,7 +65,6 @@ app.get('/assignV2',(req,res)=>{
         clearTimeout(timeoutv2)
         timeoutv2 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v2.body
-            match[token] = null
             token = ''
             activePlayers=0
             status= false
@@ -90,7 +90,6 @@ app.get('/assignV3',(req,res)=>{
         match[token] = {output: "not ready"}
         timeoutv3= setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v2.body
-            match[token] = null
             token = ''
             activePlayers=0
             status= false
@@ -111,7 +110,7 @@ app.get('/assignV3',(req,res)=>{
         clearTimeout(timeoutv3)
         timeoutv3 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v3.body
-            match[token] = null
+            
             token = ''
             activePlayers=0
             status= false
@@ -137,7 +136,7 @@ app.get('/assignV4',(req,res)=>{
         match[token] = {output: "not ready"}
         timeoutv4 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v4.body
-            match[token] = null
+           
             token = ''
             activePlayers=0
             status= false
@@ -157,7 +156,7 @@ app.get('/assignV4',(req,res)=>{
         clearTimeout(timeoutv4)
         timeoutv4 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v4.body
-            match[token] = null
+            
             token = ''
             activePlayers=0
             status= false
@@ -183,7 +182,7 @@ app.get('/assignV5',(req,res)=>{
         match[token] = {output: "not ready"}
         timeoutv5 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v5.body
-            match[token] = null
+           
             token = ''
             activePlayers=0
             status= false
@@ -203,7 +202,6 @@ app.get('/assignV5',(req,res)=>{
         clearTimeout(timeoutv5)
         timeoutv5 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v5.body
-            match[token] = null
             token = ''
             activePlayers=0
             status= false
