@@ -65,6 +65,8 @@ app.get('/assignV2',(req,res)=>{
         clearTimeout(timeoutv2)
         timeoutv2 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v2.body
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -87,13 +89,15 @@ app.get('/assignV3',(req,res)=>{
         Queue.v3.body =  {activePlayers,status,token}
         res.send(Queue.v3.body)
         console.log('sent')
-        match[token] = {output: "not ready"}
+        match[token] = {output: "not ready",expired:false}
         timeoutv3= setTimeout(()=>{
-            let {activePlayers,status,token} = Queue.v2.body
+            let {activePlayers,status,token} = Queue.v3.body
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
-            Queue.v2.body = {activePlayers,status,token}
+            Queue.v3.body = {activePlayers,status,token}
             console.log('resetted')
         },30000)
     }else{
@@ -102,7 +106,7 @@ app.get('/assignV3',(req,res)=>{
         Queue.v3.body =  {activePlayers,status,token}
         res.send(Queue.v3.body)
         if(activePlayers == Queue.v3.capcity){
-            match[token] = {output: "ready"}
+            match[token] = {output: "ready",expired:false}
             status = false
             activePlayers = 0
             Queue.v3.body =  {activePlayers,status,token}
@@ -110,7 +114,8 @@ app.get('/assignV3',(req,res)=>{
         clearTimeout(timeoutv3)
         timeoutv3 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v3.body
-            
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -133,10 +138,11 @@ app.get('/assignV4',(req,res)=>{
         Queue.v4.body =  {activePlayers,status,token}
         res.send(Queue.v4.body)
         console.log('sent')
-        match[token] = {output: "not ready"}
+        match[token] = {output: "not ready",expired:false}
         timeoutv4 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v4.body
-           
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -156,7 +162,8 @@ app.get('/assignV4',(req,res)=>{
         clearTimeout(timeoutv4)
         timeoutv4 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v4.body
-            
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -179,10 +186,11 @@ app.get('/assignV5',(req,res)=>{
         Queue.v5.body =  {activePlayers,status,token}
         res.send(Queue.v5.body)
         console.log('sent')
-        match[token] = {output: "not ready"}
+        match[token] = {output: "not ready",expired:false}
         timeoutv5 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v5.body
-           
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -194,7 +202,7 @@ app.get('/assignV5',(req,res)=>{
         Queue.v5.body =  {activePlayers,status,token}
         res.send(Queue.v5.body)
         if(activePlayers == Queue.v5.capcity){
-            match[token] = {output: "ready"}
+            match[token] = {output: "ready",expired:false}
             status = false
             activePlayers = 0
             Queue.v5.body =  {activePlayers,status,token}
@@ -202,6 +210,8 @@ app.get('/assignV5',(req,res)=>{
         clearTimeout(timeoutv5)
         timeoutv5 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v5.body
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -223,11 +233,12 @@ app.get('/assignV6',(req,res)=>{
         token = hash
         Queue.v6.body =  {activePlayers,status,token}
         res.send(Queue.v6.body)
-        match[token] = {output: "not ready"}
+        match[token] = {output: "not ready",expired:false}
         console.log('sent')
         timeoutv5 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v6.body
-            match[token] = null
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
@@ -239,7 +250,7 @@ app.get('/assignV6',(req,res)=>{
         Queue.v6.body =  {activePlayers,status,token}
         res.send(Queue.v6.body)
         if(activePlayers == Queue.v6.capacity){
-            match[token] = {output: "ready"}
+            match[token] = {output: "ready",expired:false}
             status = false
             activePlayers = 0
             Queue.v6.body =  {activePlayers,status,token}
@@ -247,7 +258,8 @@ app.get('/assignV6',(req,res)=>{
         clearTimeout(timeoutv6)
         timeoutv6 = setTimeout(()=>{
             let {activePlayers,status,token} = Queue.v6.body
-            match[token] = null
+            match[token]['expired'] = true
+            expired = true
             token = ''
             activePlayers=0
             status= false
